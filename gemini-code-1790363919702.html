@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>É Pra Já - Marketplace de Serviços</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Configuração do Tailwind para combinar com a interface do Base44 -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        border: 'hsl(214.3 31.8% 91.4%)',
+                        input: 'hsl(214.3 31.8% 91.4%)',
+                        ring: 'hsl(222.2 84% 4.9%)',
+                        background: 'hsl(0 0% 100%)',
+                        foreground: 'hsl(222.2 84% 4.9%)',
+                        primary: {
+                            DEFAULT: '#f97316', // Laranja do É Pra Já
+                            foreground: '#ffffff',
+                        },
+                        muted: {
+                            DEFAULT: 'hsl(210 40% 96.1%)',
+                            foreground: 'hsl(215.4 16.3% 46.9%)',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 text-slate-900 min-h-screen flex flex-col">
+
+    <!-- Cabeçalho Principal / Navbar -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="navegarPara('inicio')">
+                    <div class="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-md">
+                        é!
+                    </div>
+                    <div>
+                        <span class="font-extrabold text-xl tracking-tight text-slate-900">É PRA JÁ</span>
+                        <span class="block text-[10px] text-gray-500 font-medium -mt-1">MARKETPLACE DE SERVIÇOS</span>
+                    </div>
+                </div>
+
+                <!-- Navegação Desktop -->
+                <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-600">
+                    <button onclick="navegarPara('inicio')" class="hover:text-orange-600 transition">Início</button>
+                    <button onclick="navegarPara('sobre')" class="hover:text-orange-600 transition">Sobre</button>
+                    <button onclick="navegarPara('planos')" class="hover:text-orange-600 transition">Planos</button>
+                    <button onclick="navegarPara('cadastro-profissional')" class="hover:text-orange-600 transition">Seja um Profissional</button>
+                    <button onclick="navegarPara('admin')" class="hover:text-orange-600 transition flex items-center gap-1">
+                        <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Painel Admin
+                    </button>
+                </nav>
+
+                <!-- Botões de Ação -->
+                <div class="flex items-center space-x-3">
+                    <button onclick="navegarPara('login')" class="text-sm font-semibold text-gray-700 hover:text-orange-600 px-3 py-2">
+                        Entrar
+                    </button>
+                    <button onclick="navegarPara('registro')" class="text-sm font-semibold bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg shadow-sm transition">
+                        Cadastrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Dinâmico das Páginas -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6">
+
+        <!-- 1. PÁGINA INÍCIO -->
+        <section id="page-inicio" class="page-content space-y-8">
+            <div class="text-center py-12 bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl border border-orange-100 p-8">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+                    Serviços sob demanda em <span class="text-orange-500">poucos cliques</span>.
+                </h1>
+                <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+                    Conectamos você aos melhores profissionais qualificados para limpeza, reparos, cuidados e emergências.
+                </p>
+                <div class="mt-8 flex justify-center gap-4">
+                    <button onclick="navegarPara('registro')" class="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-xl shadow-md transition flex items-center gap-2">
+                        <i data-lucide="search" class="w-5 h-5"></i> Encontrar Profissional
+                    </button>
+                    <button onclick="navegarPara('cadastro-profissional')" class="bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold px-6 py-3 rounded-xl shadow-sm transition">
+                        Quero Prestar Serviços
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. PÁGINA ESQUECEU A SENHA (Interface idêntica ao Base44) -->
+        <section id="page-esqueceu-senha" class="page-content hidden max-w-md mx-auto py-12">
+            <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm space-y-6">
+                <div class="text-center space-y-2">
+                    <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto">
+                        <i data-lucide="mail" class="w-6 h-6"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-900">Redefinir senha</h2>
+                    <p class="text-sm text-gray-500">Vamos enviar-lhe um link para redefini-lo</p>
+                </div>
+
+                <form onsubmit="handleEsqueceuSenha(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Endereço de e-mail</label>
+                        <div class="relative">
+                            <i data-lucide="mail" class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                            <input type="email" id="email-recuperacao" required placeholder="seu@email.com" class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2.5 rounded-lg shadow transition flex items-center justify-center gap-2">
+                        <span>Enviar link de redefinição</span>
+                    </button>
+                </form>
+
+                <div class="text-center">
+                    <button onclick="navegarPara('login')" class="text-sm font-medium text-orange-600 hover:underline inline-flex items-center gap-1">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Voltar para iniciar sessão
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. PÁGINA LOGIN -->
+        <section id="page-login" class="page-content hidden max-w-md mx-auto py-12">
+            <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm space-y-6">
+                <div class="text-center space-y-1">
+                    <h2 class="text-2xl font-bold text-slate-900">Acesse sua conta</h2>
+                    <p class="text-sm text-gray-500">Digite suas credenciais para continuar</p>
+                </div>
+
+                <form onsubmit="event.preventDefault(); navegarPara('admin');" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
+                        <input type="email" required placeholder="seu@email.com" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 focus:outline-none">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="text-sm font-medium text-gray-700">Senha</label>
+                            <button type="button" onclick="navegarPara('esqueceu-senha')" class="text-xs text-orange-600 hover:underline">Esqueceu?</button>
+                        </div>
+                        <input type="password" required placeholder="••••••••" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 focus:outline-none">
+                    </div>
+
+                    <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2.5 rounded-lg shadow transition">
+                        Entrar na Plataforma
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- 4. PAINEL ADMIN -->
+        <section id="page-admin" class="page-content hidden space-y-6">
+            <div class="flex justify-between items-center bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Painel do Prestador</h2>
+                    <p class="text-sm text-gray-500">Gerencie seus serviços, agendamentos e clientes</p>
+                </div>
+                <button onclick="navegarPara('cadastro-profissional')" class="bg-orange-500 text-white text-sm font-semibold px-4 py-2 rounded-lg flex items-center gap-2">
+                    <i data-lucide="plus" class="w-4 h-4"></i> Novo Cadastro
+                </button>
+            </div>
+
+            <!-- Mapeamento de Métricas -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
+                    <span class="text-sm font-medium text-gray-500">Faturamento do Mês</span>
+                    <h3 class="text-3xl font-extrabold text-slate-900 mt-2">R$ 4.850,00</h3>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
+                    <span class="text-sm font-medium text-gray-500">Agendamentos Ativos</span>
+                    <h3 class="text-3xl font-extrabold text-slate-900 mt-2">12</h3>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
+                    <span class="text-sm font-medium text-gray-500">Avaliação Média</span>
+                    <h3 class="text-3xl font-extrabold text-slate-900 mt-2">4.9 / 5.0</h3>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-white border-t border-gray-200 py-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-gray-500">
+            &copy; 2026 É Pra Já Marketplace. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <!-- Lógica de Navegação e Interação estilo React Router -->
+    <script>
+        // Inicializa os ícones do Lucide
+        lucide.createIcons();
+
+        // Roteador simples no cliente
+        function navegarPara(paginaId) {
+            const paginas = document.querySelectorAll('.page-content');
+            paginas.forEach(p => p.classList.add('hidden'));
+
+            const paginaAlvo = document.getElementById(`page-${paginaId}`);
+            if (paginaAlvo) {
+                paginaAlvo.classList.remove('hidden');
+                window.scrollTo(0, 0);
+            }
+        }
+
+        // Handler da tela de Esqueceu a Senha
+        function handleEsqueceuSenha(event) {
+            event.preventDefault();
+            const email = document.getElementById('email-recuperacao').value;
+            alert(`Link de redefinição enviado com sucesso para: ${email}`);
+            navegarPara('login');
+        }
+    </script>
+</body>
+</html>
